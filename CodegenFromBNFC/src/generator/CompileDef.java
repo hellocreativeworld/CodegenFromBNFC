@@ -22,8 +22,8 @@ public class CompileDef implements Def.Visitor<String, String> {
 		
 		//System.out.println("DFun Id="+ p.id_ +"\n" + "DFun Type="+p.type_.equals());
 		
-		//LLVM Syntax
-		//Module.builder("define" + p.type_+ "@"+p.id_);
+		//LLVM Syntax fuer Funktion
+		Module.builder("define " + "@"+p.id_+"{");
 		
 		/***
 		 * Liste der Funktionsparameter:
