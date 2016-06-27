@@ -1,6 +1,11 @@
 package generator;
 
-import CPP.Absyn.*;
+import CPP.Absyn.Arg;
+import CPP.Absyn.Def;
+import CPP.Absyn.Exp;
+import CPP.Absyn.Program;
+import CPP.Absyn.Stm;
+import CPP.Absyn.Type;
 
 public class Compiler {
 	

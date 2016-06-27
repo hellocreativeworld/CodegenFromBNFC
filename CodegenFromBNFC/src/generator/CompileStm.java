@@ -1,7 +1,14 @@
 package generator;
 
-import CPP.*;
-import CPP.Absyn.*;
+import CPP.Absyn.SBlock;
+import CPP.Absyn.SDecls;
+import CPP.Absyn.SExp;
+import CPP.Absyn.SIfElse;
+import CPP.Absyn.SInit;
+import CPP.Absyn.SReturn;
+import CPP.Absyn.SReturnVoid;
+import CPP.Absyn.SWhile;
+import CPP.Absyn.Stm;
 
 /**
  * evalute the R and A
