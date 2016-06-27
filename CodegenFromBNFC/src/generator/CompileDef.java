@@ -15,7 +15,8 @@ public class CompileDef implements Def.Visitor<String, String> {
 		System.out.println("I'm Visiting DFun now (in CompileDef.java)");
 		
 		/**
-		 * Funktionstyp
+		 * Funktions-Rueckgabetyp fuer LLVM
+		 * int main
 		 */
 		Compiler.eval(p.type_);
 		
