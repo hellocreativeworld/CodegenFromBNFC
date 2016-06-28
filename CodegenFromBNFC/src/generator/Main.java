@@ -103,7 +103,8 @@ public class Main {
 		Compiler.eval(parse_tree);
 
 
-		System.out.println("Main: LLVM-Module: "+Module.llvm_output);
+		System.out.println("Main.java: LLVM-Output: \n");
+		System.out.println(Module.llvm_output);
 		//Module.mod.dump();
 
 		/**

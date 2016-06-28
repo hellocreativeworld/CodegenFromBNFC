@@ -65,16 +65,19 @@ public class CompileExp implements Exp.Visitor<String, String>{
 
 	@Override
 	public String visit(EId p, String arg) {
-		// TODO Auto-generated method stub
-		System.out.println("Visit EId");
 		
+		System.out.println("Visiting EId");
+		
+		// TODO z.B. fuer Variable int x -> %x 
+		Module.builder("%"+p.id_);
 		
 		return null;
 	}
 
 	@Override
-	public String visit(EApp p, String arg) {
-		// TODO Auto-generated method stub
+	public String visit(EApp p, String arg) 
+	{
+		
 		System.out.println("Visit EApp");
 		for(int index = 0; index < p.listexp_.size(); index++)
 		{
@@ -95,8 +98,8 @@ public class CompileExp implements Exp.Visitor<String, String>{
 
 	@Override
 	public String visit(EPDecr p, String arg) {
-		// TODO Auto-generated method stub
-		System.out.println("Visit EPDecr");
+		
+		System.out.println("Visiting EPDecr");
 		Compiler.eval(p.exp_);
 
 		return null;
@@ -237,7 +240,7 @@ public class CompileExp implements Exp.Visitor<String, String>{
 	 */
 	@Override
 	public String visit(EAss p, String arg) {
-		System.out.println("Visit EAss");
+		System.out.println("Visiting EAss");
 		Compiler.eval(p.exp_1);
 		Compiler.eval(p.exp_2);
 		

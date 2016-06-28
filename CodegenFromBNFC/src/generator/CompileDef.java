@@ -31,7 +31,7 @@ public class CompileDef implements Def.Visitor<String, String> {
 		
 		//System.out.println("p.id_="+p.id_);
 		
-		//LLVM Syntax fuer Funktionsnamen und 
+		//LLVM Syntax fuer Funktionsnamen 
 		Module.builder(" @" + p.id_);
 		
 		/***
@@ -48,19 +48,32 @@ public class CompileDef implements Def.Visitor<String, String> {
 			
 		}
 		
-		Module.builder("){"); // schliessende Klammer fuer die Argumentenliste
 		
 		/***
 		 * Liste der Statements einer Funktion
 		 * Statements werden besucht
 		 */
-		for(int i =0; i<p.liststm_.size(); i++)
+		if(p.liststm_.size() > 0)
 		{
-			Compiler.eval(p.liststm_.get(i));	
+			Module.builder("){\n entry: \n\t"); // schliessende Klammer fuer die Argumentenliste
+			
+			for(int i =0; i<p.liststm_.size(); i++)
+			{
+				Compiler.eval(p.liststm_.get(i));	
+			}
 		}
+		else
+		{
+			Module.builder("){\n");
+		}
+		
+		
+		//For Debug
+		//System.out.println("CompileDef.java: \n"+Module.llvm_output);
 		
 		// Schliessende Funktionsklammer }
 		Module.builder("}");
+		
 		
 		return null;
 	}

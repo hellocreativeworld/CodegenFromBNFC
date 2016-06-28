@@ -29,7 +29,8 @@ public class Filewriter {
 		//System.out.println("Filename(Filewriter)=" + Main.filename);
 
 		StringBuilder sb = new StringBuilder();
-		sb.append(Main.filename).append("_output").append(".txt");
+		//sb.append(Main.filename).append("_output").append(".txt");
+		sb.append(Main.filename).append("_output").append(".ll");
 		String outputname = sb.toString();
 		
 		// For Debug

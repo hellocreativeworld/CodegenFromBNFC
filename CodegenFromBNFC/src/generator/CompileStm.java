@@ -23,11 +23,13 @@ public class CompileStm implements Stm.Visitor<String, String>{
  * String work 
  */
 	@Override
-	public String visit(SExp p, String arg) {
-		// TODO Auto-generated method stub
-		System.out.println("Visit SExp");
+	public String visit(SExp p, String arg) 
+	{
+		
+		System.out.println("Visiting SExp");
 
 		Compiler.eval(p.exp_);
+		Module.builder("\n");
 		return null;
 	}
 
@@ -67,9 +69,11 @@ public class CompileStm implements Stm.Visitor<String, String>{
 	}
 
 	@Override
-	public String visit(SReturn p, String arg) {
-		// TODO Auto-generated method stub
-		System.out.println("Visit SReturn");
+	public String visit(SReturn p, String arg) 
+	{
+		
+		System.out.println("Visiting SReturn");
+		Module.builder("ret ");
 		Compiler.eval(p.exp_);
 		return null;
 	}
@@ -77,14 +81,15 @@ public class CompileStm implements Stm.Visitor<String, String>{
 	@Override
 	public String visit(SReturnVoid p, String arg) {
 		// TODO Auto-generated method stub
-		System.out.println("Visit SReturnVoid");
+		System.out.println("Visiting SReturnVoid");
+		Module.builder("ret void");
 		return null;
 	}
 
 	@Override
 	public String visit(SWhile p, String arg) {
 		// TODO Auto-generated method stub
-		System.out.println("Visit SWhile");
+		System.out.println("Visiting SWhile");
 		Compiler.eval(p.exp_);
 		Compiler.eval(p.stm_);
 		return null;

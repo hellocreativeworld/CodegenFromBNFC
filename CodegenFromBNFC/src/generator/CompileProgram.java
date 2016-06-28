@@ -25,13 +25,13 @@ public class CompileProgram implements Visitor<String, String>{
 		//
 		for(int i =0 ; i< p.listdef_.size(); i++)
 		{
+			// LLVM Funktionsdefinition
+			Module.builder("define ");
+			
 			/**
 			 * fuer jede Funktion wird eval(DFun) aus Compiler aufgerufen
 			 * 
 			 */
-			
-			// LLVM Funktionsdefinition
-			Module.builder("define ");
 			Compiler.eval(p.listdef_.get(i));
 			
 			
