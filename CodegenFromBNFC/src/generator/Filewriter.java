@@ -16,7 +16,7 @@ import java.io.PrintStream;
 public class Filewriter {
 	
 	
-	private String outputname;
+	//private String outputname;
 	
  
  
@@ -25,14 +25,29 @@ public class Filewriter {
  * with the llvm_output
  * @param fileName
  */
- public static void writeFile(String fileName){
+ public static void writeFile(String fileName)
+ {
+	 System.out.println("Filename(Filewriter)=" + Main.filename);
+	 
 	 StringBuilder sb = new StringBuilder();
-	 sb.append(fileName).append("output").append(".txt");
+	 sb.append(Main.filename).append("_output").append(".txt");
 	 String outputname = sb.toString();
-	 try(PrintStream out= new PrintStream(new FileOutputStream("outputname"))){
+	 
+	 System.out.println("outputname(Filewriter)=" + outputname);
+	 
+	 try(PrintStream out= new PrintStream(new FileOutputStream(outputname)))
+	 {
+		 
 		 out.print(Module.llvm_output);
-	 } catch (FileNotFoundException e) {
+		 
+	 }catch (FileNotFoundException e) {
 		System.out.println(e.getMessage());
 	}
  }
+ 
+ public static void writeLLVMModuleToFile(String fileName)
+ {
+	 
+ }
+ 
 }
