@@ -20,7 +20,7 @@ public class CompileProgram implements Visitor<String, String>{
  */
 	@Override
 	public String visit(PDefs p, String arg) {
-		System.out.println("Visit PDefs");
+		System.out.println("I'm visiting PDefs (CompileProgram.java)");
 		
 		//
 		for(int i =0 ; i< p.listdef_.size(); i++)
@@ -30,8 +30,8 @@ public class CompileProgram implements Visitor<String, String>{
 			 * 
 			 */
 			
-			//System.out.println("CompileProgram arg:");
-			
+			// LLVM Funktionsdefinition
+			Module.builder("define ");
 			Compiler.eval(p.listdef_.get(i));
 			
 			

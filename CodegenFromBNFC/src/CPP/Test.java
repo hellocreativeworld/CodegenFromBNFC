@@ -1,8 +1,7 @@
 package CPP;
-import java_cup.runtime.*;
-import CPP.*;
-import CPP.Absyn.*;
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.InputStreamReader;
 
 public class Test
 {

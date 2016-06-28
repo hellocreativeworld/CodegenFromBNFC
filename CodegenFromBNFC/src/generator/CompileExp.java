@@ -230,10 +230,13 @@ public class CompileExp implements Exp.Visitor<String, String>{
 		
 		return null;
 	}
-
+	
+	/**
+	 * Exp = Assignement:
+	 * z.B. x = 2;
+	 */
 	@Override
 	public String visit(EAss p, String arg) {
-		// TODO Auto-generated method stub
 		System.out.println("Visit EAss");
 		Compiler.eval(p.exp_1);
 		Compiler.eval(p.exp_2);

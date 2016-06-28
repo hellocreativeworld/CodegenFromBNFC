@@ -47,11 +47,22 @@ public class CompileStm implements Stm.Visitor<String, String>{
 		return null;
 	}
 
+	/***
+	 * 
+	 * 
+	 * SInit. Stm ::= Type Id "=" Exp ";" ;
+	 */
 	@Override
 	public String visit(SInit p, String arg) {
 		System.out.println("Visit SInit");
-		// TODO Auto-generated method stub
+		
+		// Deklarations-Typ
+		Compiler.eval(p.type_);
+		
+		Module.builder(p.id_+ "=");
+		
 		Compiler.eval(p.exp_);
+		
 		return null;
 	}
 
@@ -78,14 +89,25 @@ public class CompileStm implements Stm.Visitor<String, String>{
 		Compiler.eval(p.stm_);
 		return null;
 	}
-
+	
+	
+	/**
+	 * SBlock ist z.B. innerhalb einer While-Schleife
+	 * while() SBlock
+	 * 
+	 * <=> while(){ [Stm] }
+	 * 
+	 */
 	@Override
-	public String visit(SBlock p, String arg) {
-		System.out.println("Visit SBlock");
-		// TODO Auto-generated method stub
-		for(int i=0; i<p.liststm_.size(); i++){
+	public String visit(SBlock p, String arg) 
+	{
+		System.out.println("I'm visiting SBlock now");
+		
+		for(int i=0; i<p.liststm_.size(); i++)
+		{
+			Module.builder("{"); // oeffnende SBlock-Klammer
 			Compiler.eval(p.liststm_.get(i));
-			
+			Module.builder("}"); // schliessende SBlock-Klammer
 		}
 		
 		return null;

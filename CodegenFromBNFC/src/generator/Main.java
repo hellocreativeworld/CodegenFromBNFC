@@ -19,12 +19,19 @@ public class Main {
 		try 
 		{
 
-			File f = new File("testfiles_cc/good01.cc");
-			System.out.println("f="+f.toString());
-			boolean testf = f.createNewFile();
-			System.out.println("File exists?"+!testf);
+			File f = new File("testfiles_cc/good03.cc");
+			
+			//File f = new File("testfiles_cc/good13.cc");
+
+			//For Debug:
+//			System.out.println("f="+f.toString());
+//			boolean testf = f.createNewFile();
+//			System.out.println("File exists?"+!testf);
+
 			filename = f.getName();
-			System.out.println("filename="+filename);
+
+			//For Debug
+			//System.out.println("filename="+filename);
 
 			if(!f.exists())
 			{
@@ -53,7 +60,7 @@ public class Main {
 
 
 				generateCode(parse_tree);
-				
+
 			} catch (Exception e) 
 			{
 				// Error-Message
@@ -69,14 +76,15 @@ public class Main {
 	/**
 	 * Codegeneration:
 	 * Durchlaufe den Abstrakten Syntaxbaum und 
-	 * traverse through the abstract syntax tree and 
+	 * schreibe in jedem Konstruktor (Knoten des Syntaxbaums)
+	 * den entsprechenden LLVM-Code in das LLVM-Module
+	 * (z.B. Textfile good01.cc_output.txt)
+	 * 
+	 * 
 	 * 
 	 * implement the functions
 	 * 			-read through the doc of llvm to find the correct string values for the functions
 	 * print the string in an existing file
-	 * make java to execute jasmin and with that text file
-	 * For any 
-	 * 
 	 * 
 	 * maybe it does make sense to do sysos in every visit and eval 
 	 * @param parse_tree
@@ -95,7 +103,7 @@ public class Main {
 		Compiler.eval(parse_tree);
 
 
-		System.out.println("Modul: LLVM-Output="+Module.llvm_output);
+		System.out.println("Main: LLVM-Module: "+Module.llvm_output);
 		//Module.mod.dump();
 
 		/**
