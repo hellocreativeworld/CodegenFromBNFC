@@ -4,6 +4,7 @@ int main ()
   int ret = 1 ;
 
   int i = 1 ;
+  
 
   while (i < arg + 1) {
     ret = i * ret ;
@@ -11,6 +12,6 @@ int main ()
   }
   printInt(ret) ;
 
-  return 0;
+  //return 0;
 }
 

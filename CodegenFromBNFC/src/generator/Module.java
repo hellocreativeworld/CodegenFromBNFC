@@ -6,6 +6,16 @@ public  class Module {
 	static String llvm_output="";
 	static HashMap<String, String> context = new HashMap<>(); // String funktionsmname String inhalt(llvm)
 	
+	/**
+	 * Naechster freie Index fuer die temporaeren Variablen 
+	 * in LLVM IR, z.B. %1 
+	 * */
+	static int nextIndex = 1;
+	
+	static int getNextIndex()
+	{
+		return nextIndex++;
+	}
 	
 	/**
 	 * Erstellt den LLVM-Code, also die LLVM IR des C++-Programms:

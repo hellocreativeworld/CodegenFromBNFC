@@ -17,7 +17,11 @@ public class CompileArg implements Arg.Visitor<String, String>{
 	public String visit(ADecl p, String arg) {
 		System.out.println("Visit ADecl");
 		
-		// TODO Auto-generated method stub
+		Compiler.eval(p.type_);
+		
+		Module.builder(" %" + p.id_);
+		
+				
 		return null;
 	}
 

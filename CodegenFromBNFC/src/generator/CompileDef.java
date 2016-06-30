@@ -35,7 +35,7 @@ public class CompileDef implements Def.Visitor<String, String> {
 		Module.builder(" @" + p.id_);
 		
 		/***
-		 * Liste der Funktionsparameter:
+		 * Liste der Funktionsparameter (Argumente):
 		 * Parameter werden besucht
 		 */
 		
@@ -48,23 +48,54 @@ public class CompileDef implements Def.Visitor<String, String> {
 			
 		}
 		
+		/**
+		 * schliessende Klammer fuer die Argumentenliste,
+		 * oeffnende Klammer fuer den Function-Body, 
+		 * plus 2 Zeilenumbrueche
+		 */
+		Module.builder("){\n\n\t");
 		
 		/***
-		 * Liste der Statements einer Funktion
+		 * Liste der Statements einer Funktion:
 		 * Statements werden besucht
+		 * 
+		 * wenn Statement-Liste nicht leer, 
+		 * dann 
 		 */
 		if(p.liststm_.size() > 0)
 		{
-			Module.builder("){\n entry: \n\t"); // schliessende Klammer fuer die Argumentenliste
+			//Module.builder("){\n entry: \n\t"); 
+			
+			
 			
 			for(int i =0; i<p.liststm_.size(); i++)
 			{
-				Compiler.eval(p.liststm_.get(i));	
+				Compiler.eval(p.liststm_.get(i));
+				
+				/**
+				 * Nach jedem Statement Zeilenumbruch und
+				 * Tabulator einfuegen, sodass jedes Statement 
+				 * in der eigenen Zeile steht und eingerueckt ist
+				 */
+				Module.builder("\n\t");
 			}
 		}
-		else
+//		else
+//		{
+//			/**
+//			 * Wenn Funktions-Body leer, dann einfach Zeilenumbruch
+//			 */
+//			Module.builder("){\n");
+//		}
+		
+		
+		/**
+		 * Wenn Funktionsrueckgabewert void
+		 * und kein "return;" im Function-Body
+		 */
+		if(p.type_ instanceof CPP.Absyn.Type_void)
 		{
-			Module.builder("){\n");
+			Module.builder("\t ret void");
 		}
 		
 		
@@ -72,7 +103,7 @@ public class CompileDef implements Def.Visitor<String, String> {
 		//System.out.println("CompileDef.java: \n"+Module.llvm_output);
 		
 		// Schliessende Funktionsklammer }
-		Module.builder("}");
+		Module.builder("\n}");
 		
 		
 		return null;

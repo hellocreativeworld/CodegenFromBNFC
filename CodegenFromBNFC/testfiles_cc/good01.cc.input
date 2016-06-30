@@ -1,0 +1,23 @@
+[Abstract Syntax]
+
+(PDefs [(DFun Type_int "main" [] [(SInit Type_int "arg" (EApp "readInt" [])), (SInit Type_int "ret" (EInt 1)), (SInit Type_int "i" (EInt 1)), (SWhile (ELt (EId "i") (EPlus (EId "arg") (EInt 1))) (SBlock [(SExp (EAss (EId "ret") (ETimes (EId "i") (EId "ret")))), (SExp (EIncr (EId "i")))])), (SExp (EApp "printInt" [(EId "ret")]))])]) 
+
+
+int main ()
+{
+  int arg = readInt() ;
+  int ret = 1 ;
+
+  int i = 1 ;
+  
+
+  while (i < arg + 1) 
+  {
+    ret = i * ret ;
+    ++i ;
+  }
+
+  printInt(ret) ;
+
+  //return 0;
+}

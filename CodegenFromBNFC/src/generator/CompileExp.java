@@ -28,24 +28,43 @@ public class CompileExp implements Exp.Visitor<String, String>{
 	}
 	
 	@Override
-	public String visit(ETrue p, String arg) {
-		// TODO Auto-generated method stub
-		System.out.println("Visit ETrue");
+	public String visit(ETrue p, String arg) 
+	{
+		System.out.println("Visiting ETrue");
+		
+		/**
+		 * bool b = true;
+		 * 		%b = alloca i8, align 1
+		 * 		store i8 1, i8* %b, align 1
+		 */
+		
+		Module.builder("true");
 		
 		return null;
 	}
 
 	@Override
-	public String visit(EFalse p, String arg) {
-		System.out.println("Visit EFalse");
-		// TODO Auto-generated method stub
+	public String visit(EFalse p, String arg) 
+	{
+		System.out.println("Visiting EFalse");
+		
+		Module.builder("false");
+		
 		return null;
 	}
 
 	@Override
 	public String visit(EInt p, String arg) {
-		System.out.println("Visit EInt");
-		//return LLVMConstantInteger.
+		System.out.println("Visiting EInt");
+		
+		//Module.builder("i32" + p.integer_);
+		
+		/**
+		 * TODO: muss i32 hier stehen oder in der
+		 * aufrufenden Funktion (Vorgaengeraufgruf) ?
+		 */
+		Module.builder("i32 " + p.integer_);
+		
 		return null;
 	}
 
@@ -68,22 +87,44 @@ public class CompileExp implements Exp.Visitor<String, String>{
 		
 		System.out.println("Visiting EId");
 		
-		// TODO z.B. fuer Variable int x -> %x 
+		// TODO CompileExp.java EId
+		// z.B. fuer Variable int x -> %x 
 		Module.builder("%"+p.id_);
 		
 		return null;
 	}
 
+	/**
+	 * Funktionsaufruf, 
+	 * z.B. printInt(x);
+	 * 
+	 * %1 = call i32 @FunId(i32 %var1, ...)
+	 */
 	@Override
 	public String visit(EApp p, String arg) 
 	{
 		
-		System.out.println("Visit EApp");
-		for(int index = 0; index < p.listexp_.size(); index++)
+		System.out.println("Visiting EApp");
+		
+		/***
+		 * TODO EApp: add Type of the called Function to ModuleBuilder-String
+		 */
+		Module.builder("%" + Module.getNextIndex() + " = call " + "[TODO-Fun-Type]" + "@" + p.id_+"(");
+		
+		/**
+		 * Liste von Expressions wird durchlaufen und 
+		 * jede Exp evaluiert
+		 */
+		if(p.listexp_.size() > 0)
 		{
-			Compiler.eval(p.listexp_.get(index));
+			for(int index = 0; index < p.listexp_.size(); index++)
+			{
+				Compiler.eval(p.listexp_.get(index));
+			}
 		}
-
+		
+		Module.builder(")");
+		
 		return null;
 	}
 

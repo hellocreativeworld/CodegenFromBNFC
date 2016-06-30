@@ -67,7 +67,7 @@ public class CompileType implements Visitor<String, String> {
 	@Override
 	public String visit(Type_string p, String arg) 
 	{
-		System.out.println("I'm visiting Type_string now");
+		System.out.println("Visiting Type_string");
 		
 		/**
 		 * TODO

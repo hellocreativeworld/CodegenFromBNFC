@@ -7,7 +7,8 @@ import CPP.Absyn.Program;
 import CPP.Absyn.Stm;
 import CPP.Absyn.Type;
 
-public class Compiler {
+public class Compiler 
+{
 	
 	public static void eval(Type t){
 		System.out.println("Eval Expression:");

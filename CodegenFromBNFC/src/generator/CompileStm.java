@@ -29,28 +29,52 @@ public class CompileStm implements Stm.Visitor<String, String>{
 		System.out.println("Visiting SExp");
 
 		Compiler.eval(p.exp_);
-		Module.builder("\n");
+		//SModule.builder("\n");
 		return null;
 	}
 
 	
 	/**
-	 * Todo Special case
+	 * TODO Special case
+	 * 
+	 * Deklarationen von Variablen (-listen)
+	 * SDecls. Stm ::= Type [Id] ";" ;
+	 * 
 	 */
 	@Override
 	public String visit(SDecls p, String arg) {
-		System.out.println("Visit SDecls");
+		System.out.println("Visiting SDecls");
 //		for(int i =0; i< p.listid_.size(); i++)
 //		{
 //			Compiler.eval(p.listid_.get(i));
 //		}
 		
-		// TODO Auto-generated method stub
+		/**
+		 * Deklarationstyp
+		 */
+		Compiler.eval(p.type_);
+		
+		/**
+		 * Deklarationsliste
+		 * listid ist eine Liste von Strings
+		 */
+		for(int i =0; i< p.listid_.size(); i++)
+		{
+			//Compiler.eval(p.listid_);
+			
+			/***
+			 * SDecls . Stm ::= Type [Id] ";"
+			 */
+			// TODO SDecls in LLVM IR
+			Module.builder("%" + p.listid_.get(i)+"= alloca i32, align 4" + "\n");
+		}
+		
+		
 		return null;
 	}
 
 	/***
-	 * 
+	 * Deklaration und Initialisierung von Variable
 	 * 
 	 * SInit. Stm ::= Type Id "=" Exp ";" ;
 	 */
@@ -58,10 +82,15 @@ public class CompileStm implements Stm.Visitor<String, String>{
 	public String visit(SInit p, String arg) {
 		System.out.println("Visit SInit");
 		
+		
+		Module.builder("%" + p.id_ + " = alloca ");
+		
+		//Module.builder("%" + Module.getNextIndex()+" = call");
+		
 		// Deklarations-Typ
 		Compiler.eval(p.type_);
 		
-		Module.builder(p.id_+ "=");
+		Module.builder( " "+p.id_ + ", " + "align 4\n\t");
 		
 		Compiler.eval(p.exp_);
 		
@@ -73,6 +102,12 @@ public class CompileStm implements Stm.Visitor<String, String>{
 	{
 		
 		System.out.println("Visiting SReturn");
+		
+		/**
+		 * LLVM 
+		 * ret <type> <value>
+		 */
+		
 		Module.builder("ret ");
 		Compiler.eval(p.exp_);
 		return null;
@@ -80,16 +115,28 @@ public class CompileStm implements Stm.Visitor<String, String>{
 
 	@Override
 	public String visit(SReturnVoid p, String arg) {
-		// TODO Auto-generated method stub
+		
 		System.out.println("Visiting SReturnVoid");
+		
+		/**
+		 * LLVM: 
+		 * ret void
+		 */
 		Module.builder("ret void");
 		return null;
 	}
 
 	@Override
 	public String visit(SWhile p, String arg) {
-		// TODO Auto-generated method stub
+		// TODO SWhile
 		System.out.println("Visiting SWhile");
+		
+		
+		/**
+		 * LLVM: 
+		 * br i1 <cond>, label <iftrue>, label <iffalse>
+		 */
+		
 		Compiler.eval(p.exp_);
 		Compiler.eval(p.stm_);
 		return null;

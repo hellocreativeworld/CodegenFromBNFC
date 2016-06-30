@@ -19,7 +19,10 @@ public class Main {
 		try 
 		{
 
-			File f = new File("testfiles_cc/good03.cc");
+//			File f = new File("testfiles_cc/good03.cc");
+			
+			//My own testfiles
+			File f = new File("testfiles_cc/myTestFiles/testfile.cc");
 			
 			//File f = new File("testfiles_cc/good13.cc");
 
