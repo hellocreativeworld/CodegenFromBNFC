@@ -29,7 +29,7 @@ public  class Module {
 	 * 
 	 * @param str der anzuhaengende String
 	 */
-	static void builder(String str){
+	static void buildString(String str){
 		StringBuilder sb = new StringBuilder();
 		sb.append(llvm_output).append(str);
 		llvm_output = sb.toString();

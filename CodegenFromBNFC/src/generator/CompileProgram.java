@@ -26,7 +26,7 @@ public class CompileProgram implements Visitor<String, String>{
 		for(int i =0 ; i< p.listdef_.size(); i++)
 		{
 			/**LLVM Funktionsdefinition Schluesselwort "define" */
-			Module.builder("define ");
+			Module.buildString("define ");
 			
 			/**
 			 * Innerhalb eines Programms wird fuer jede
@@ -34,7 +34,7 @@ public class CompileProgram implements Visitor<String, String>{
 			 * (aus Compiler.java)
 			 */
 			Compiler.eval(p.listdef_.get(i));
-			Module.builder("\n\n");
+			Module.buildString("\n\n");
 			
 			
 		}

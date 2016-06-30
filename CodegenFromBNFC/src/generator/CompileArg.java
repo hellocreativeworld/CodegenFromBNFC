@@ -19,7 +19,7 @@ public class CompileArg implements Arg.Visitor<String, String>{
 		
 		Compiler.eval(p.type_);
 		
-		Module.builder(" %" + p.id_);
+		Module.buildString(" %" + p.id_);
 		
 				
 		return null;

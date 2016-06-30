@@ -66,7 +66,7 @@ public class CompileStm implements Stm.Visitor<String, String>{
 			 * SDecls . Stm ::= Type [Id] ";"
 			 */
 			// TODO SDecls in LLVM IR
-			Module.builder("%" + p.listid_.get(i)+"= alloca i32, align 4" + "\n");
+			Module.buildString("%" + p.listid_.get(i)+"= alloca i32, align 4" + "\n");
 		}
 		
 		
@@ -83,14 +83,14 @@ public class CompileStm implements Stm.Visitor<String, String>{
 		System.out.println("Visit SInit");
 		
 		
-		Module.builder("%" + p.id_ + " = alloca ");
+		Module.buildString("%" + p.id_ + " = alloca ");
 		
 		//Module.builder("%" + Module.getNextIndex()+" = call");
 		
 		// Deklarations-Typ
 		Compiler.eval(p.type_);
 		
-		Module.builder( " "+p.id_ + ", " + "align 4\n\t");
+		Module.buildString( " "+p.id_ + ", " + "align 4\n\t");
 		
 		Compiler.eval(p.exp_);
 		
@@ -108,7 +108,7 @@ public class CompileStm implements Stm.Visitor<String, String>{
 		 * ret <type> <value>
 		 */
 		
-		Module.builder("ret ");
+		Module.buildString("ret ");
 		Compiler.eval(p.exp_);
 		return null;
 	}
@@ -122,7 +122,7 @@ public class CompileStm implements Stm.Visitor<String, String>{
 		 * LLVM: 
 		 * ret void
 		 */
-		Module.builder("ret void");
+		Module.buildString("ret void");
 		return null;
 	}
 
@@ -136,7 +136,6 @@ public class CompileStm implements Stm.Visitor<String, String>{
 		 * LLVM: 
 		 * br i1 <cond>, label <iftrue>, label <iffalse>
 		 */
-		
 		Compiler.eval(p.exp_);
 		Compiler.eval(p.stm_);
 		return null;
@@ -157,9 +156,9 @@ public class CompileStm implements Stm.Visitor<String, String>{
 		
 		for(int i=0; i<p.liststm_.size(); i++)
 		{
-			Module.builder("{"); // oeffnende SBlock-Klammer
+			Module.buildString("{"); // oeffnende SBlock-Klammer
 			Compiler.eval(p.liststm_.get(i));
-			Module.builder("}"); // schliessende SBlock-Klammer
+			Module.buildString("}"); // schliessende SBlock-Klammer
 		}
 		
 		return null;
@@ -169,6 +168,10 @@ public class CompileStm implements Stm.Visitor<String, String>{
 	public String visit(SIfElse p, String arg) {
 		
 		System.out.println("Visit SIfElse");
+		/**
+		 * LLVM: 
+		 * br i1 <cond>, label <iftrue>, label <iffalse>
+		 */
 		Compiler.eval(p.exp_);
 		Compiler.eval(p.stm_1);
 		Compiler.eval(p.stm_2);

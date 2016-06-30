@@ -18,7 +18,7 @@ public class CompileType implements Visitor<String, String> {
 		 * TODO
 		 * bool in LLVM : 
 		 */
-		Module.builder("bool");
+		Module.buildString("bool");
 		
 		return null;
 	}
@@ -31,7 +31,7 @@ public class CompileType implements Visitor<String, String> {
 		/**
 		 * int in LLVM : 
 		 */
-		Module.builder("i32");
+		Module.buildString("i32");
 		
 		return null;
 	}
@@ -45,7 +45,7 @@ public class CompileType implements Visitor<String, String> {
 		 * TODO
 		 * double in LLVM : 
 		 */
-		Module.builder("double");
+		Module.buildString("double");
 		
 		return null;
 	}
@@ -59,7 +59,7 @@ public class CompileType implements Visitor<String, String> {
 		 * TODO
 		 * void in LLVM : 
 		 */
-		Module.builder("void");
+		Module.buildString("void");
 		
 		return null;
 	}

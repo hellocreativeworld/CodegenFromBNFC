@@ -38,7 +38,7 @@ public class CompileExp implements Exp.Visitor<String, String>{
 		 * 		store i8 1, i8* %b, align 1
 		 */
 		
-		Module.builder("true");
+		Module.buildString("i8 1");
 		
 		return null;
 	}
@@ -48,7 +48,7 @@ public class CompileExp implements Exp.Visitor<String, String>{
 	{
 		System.out.println("Visiting EFalse");
 		
-		Module.builder("false");
+		Module.buildString("i8, 0");
 		
 		return null;
 	}
@@ -57,13 +57,11 @@ public class CompileExp implements Exp.Visitor<String, String>{
 	public String visit(EInt p, String arg) {
 		System.out.println("Visiting EInt");
 		
-		//Module.builder("i32" + p.integer_);
-		
 		/**
 		 * TODO: muss i32 hier stehen oder in der
 		 * aufrufenden Funktion (Vorgaengeraufgruf) ?
 		 */
-		Module.builder("i32 " + p.integer_);
+		Module.buildString("i32 " + p.integer_);
 		
 		return null;
 	}
@@ -89,7 +87,7 @@ public class CompileExp implements Exp.Visitor<String, String>{
 		
 		// TODO CompileExp.java EId
 		// z.B. fuer Variable int x -> %x 
-		Module.builder("%"+p.id_);
+		Module.buildString("%"+p.id_);
 		
 		return null;
 	}
@@ -109,7 +107,7 @@ public class CompileExp implements Exp.Visitor<String, String>{
 		/***
 		 * TODO EApp: add Type of the called Function to ModuleBuilder-String
 		 */
-		Module.builder("%" + Module.getNextIndex() + " = call " + "[TODO-Fun-Type]" + "@" + p.id_+"(");
+		Module.buildString("%" + Module.getNextIndex() + " = call " + "[TODO-Fun-Type]" + "@" + p.id_+"(");
 		
 		/**
 		 * Liste von Expressions wird durchlaufen und 
@@ -123,7 +121,7 @@ public class CompileExp implements Exp.Visitor<String, String>{
 			}
 		}
 		
-		Module.builder(")");
+		Module.buildString(")");
 		
 		return null;
 	}

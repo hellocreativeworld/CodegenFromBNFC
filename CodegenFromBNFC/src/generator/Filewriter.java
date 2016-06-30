@@ -19,8 +19,8 @@ public class Filewriter {
 
 
 	/**
-	 * uses the initiale file name like good01.cc and creates a File calles good01.cc_output.txt
-	 * with the llvm_output
+	 * uses the initiale file name like good01.cc and creates a File called 
+	 * good01.cc_output.txt or good01.cc_output.ll with the llvm_output
 	 * @param fileName
 	 */
 	public static void writeFile()

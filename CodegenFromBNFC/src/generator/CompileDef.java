@@ -32,14 +32,14 @@ public class CompileDef implements Def.Visitor<String, String> {
 		//System.out.println("p.id_="+p.id_);
 		
 		//LLVM Syntax fuer Funktionsnamen 
-		Module.builder(" @" + p.id_);
+		Module.buildString(" @" + p.id_);
 		
 		/***
 		 * Liste der Funktionsparameter (Argumente):
 		 * Parameter werden besucht
 		 */
 		
-		Module.builder("("); // oeffnende Klammer fuer die Argumentenliste
+		Module.buildString("("); // oeffnende Klammer fuer die Argumentenliste
 		
 		for(int i =0; i<p.listarg_.size(); i++)
 		{
@@ -53,7 +53,7 @@ public class CompileDef implements Def.Visitor<String, String> {
 		 * oeffnende Klammer fuer den Function-Body, 
 		 * plus 2 Zeilenumbrueche
 		 */
-		Module.builder("){\n\n\t");
+		Module.buildString("){\n\n\t");
 		
 		/***
 		 * Liste der Statements einer Funktion:
@@ -77,7 +77,7 @@ public class CompileDef implements Def.Visitor<String, String> {
 				 * Tabulator einfuegen, sodass jedes Statement 
 				 * in der eigenen Zeile steht und eingerueckt ist
 				 */
-				Module.builder("\n\t");
+				Module.buildString("\n\t");
 			}
 		}
 //		else
@@ -95,7 +95,7 @@ public class CompileDef implements Def.Visitor<String, String> {
 		 */
 		if(p.type_ instanceof CPP.Absyn.Type_void)
 		{
-			Module.builder("\t ret void");
+			Module.buildString("\t ret void");
 		}
 		
 		
@@ -103,7 +103,7 @@ public class CompileDef implements Def.Visitor<String, String> {
 		//System.out.println("CompileDef.java: \n"+Module.llvm_output);
 		
 		// Schliessende Funktionsklammer }
-		Module.builder("\n}");
+		Module.buildString("\n}");
 		
 		
 		return null;
